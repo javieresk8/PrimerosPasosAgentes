@@ -11,17 +11,13 @@ import jade.core.Agent;
  *
  * @author uuse
  */
-public class Agente1 extends Agent{
+public class Agente2 extends Agent{
 
      @Override
     protected void setup() {
         /*Configuracion inicial del agente*/
         super.setup();
          System.out.println(getName());
-         System.out.println(getLocalName());
-         System.out.println(getAgentState());
-         System.out.println(getContentManager());
-         
         
     }
     

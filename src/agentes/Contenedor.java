@@ -4,18 +4,21 @@
  * and open the template in the editor.
  */
 package agentes;
+import com.sun.istack.internal.logging.Logger;
+import com.sun.org.apache.bcel.internal.classfile.ClassParser;
 import jade.core.Profile;
 import jade.core.ProfileImpl;
 import jade.wrapper.AgentContainer;
 import jade.wrapper.AgentController;
 import jade.wrapper.StaleProxyException;
+import java.util.logging.Level;
 /**
  *
  * @author uuse
  */
 public class Contenedor {
 
-    AgentController agenteController; //Este aun no sabemos que es lo que hace, no influye en el contenedor, es para arrancar los agentes
+    AgentController agentController; //Este aun no sabemos que es lo que hace, no influye en el contenedor, es para arrancar los agentes
     AgentContainer mainContainer; //ojo que viene de wrapern no del CORE 
     
     public void contenedor(){
@@ -34,8 +37,27 @@ public class Contenedor {
         recibe como parametro el perfil creado*/
         mainContainer = runtime.createMainContainer(profile);
         System.out.println(String.format("Contenedor creado %s", profile.toString()));
+        iniciarAgentes();
         
-        
+    }
+    
+    private void iniciarAgentes(){
+        try {
+            /*Cuando creamos el agente, le pasamos un nickanme,el nombre de la clase en el que esta
+            y el tercer parametro es el de CONOCIMIENTO PREVIO, el agente va a tener un conocimiento 
+            de otro agente, de la computadora, una red neuronal o cualquier tipo de cosa*/
+            /*Podemos hacer que el Agente muera y cree un hijo que le pase el conocimiento*/
+            /*Start abre un hilo que invoca al setup del agente*/
+            
+            //El orde en el que arranquemos los agentes es importante, deende de la arq de los Agentes 
+            //Debes fijarte en que deben existir receptores para luego crear emisores
+            //De igual manera debemos arrancar primero los agentes que reciben y no los que envian
+            mainContainer.createNewAgent("Agente1", Agente1.class.getName(), null).start();
+            mainContainer.createNewAgent("Agente2", Agente2.class.getName(), null).start();
+            
+        } catch (StaleProxyException ex) {
+            Logger.getLogger(Contenedor.class.getName(), null).log(Level.SEVERE, null, ex);
+        }
     }
     
     public static void main(String[] args) {
