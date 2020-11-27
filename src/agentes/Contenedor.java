@@ -52,8 +52,10 @@ public class Contenedor {
             //El orde en el que arranquemos los agentes es importante, deende de la arq de los Agentes 
             //Debes fijarte en que deben existir receptores para luego crear emisores
             //De igual manera debemos arrancar primero los agentes que reciben y no los que envian
-            mainContainer.createNewAgent("Agente1", Agente1.class.getName(), null).start();
-            mainContainer.createNewAgent("Agente2", Agente2.class.getName(), null).start();
+            mainContainer.createNewAgent("Ag4", Agente4.class.getName(), null).start();
+            mainContainer.createNewAgent("Ag3", Agente3.class.getName(), null).start();
+            mainContainer.createNewAgent("Ag2", Agente2.class.getName(), null).start();
+            mainContainer.createNewAgent("Ag1", Agente1.class.getName(), null).start();
             
         } catch (StaleProxyException ex) {
             Logger.getLogger(Contenedor.class.getName(), null).log(Level.SEVERE, null, ex);
