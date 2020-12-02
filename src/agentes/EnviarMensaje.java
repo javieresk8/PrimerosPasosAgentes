@@ -50,12 +50,16 @@ public class EnviarMensaje {
     
     public void enviarMensajeString(int tipoMsj, String receptor,
             Agent agenteEmisor, String contenido, String conversationID){
+        /*El ID de la conversacion debe ser unica, por que es el que localiza quien se esta comunicando*/
         ACLMessage acl = new ACLMessage(tipoMsj);
+        /*Identificador de agente*/
         AID id = new AID();
         id.setLocalName(receptor);
         acl.addReceiver(id);
         acl.setSender(agenteEmisor.getAID());
+        /*puede ser cualquier lenguaje este caso es el Standard Language*/
         acl.setLanguage(FIPANames.ContentLanguage.FIPA_SL);
+        /*Contenido cualquier tipo String*/
         acl.setContent(contenido);
         acl.setConversationId(conversationID);
         agenteEmisor.send(acl);

@@ -40,19 +40,27 @@ public class Agente1 extends Agent{
 
         @Override
         public void action() {
-            /*Enviamos un mensaje al agente 2*/
-            /*Invocamos al agente 2 para en su comportamiento obtener el mensaje*/
-            new EnviarMensaje().enviarMensajeString(ACLMessage.INFORM, "Ag2", getAgent(), "Hola agente, soy " + getAgent().getName(), "COD001");
+//            /*Enviamos un mensaje al agente 2*/
+//            /*Invocamos al agente 2 para en su comportamiento obtener el mensaje*/
+//            /*Si fuera un REQUEST se aplica un blockReceive y espera la respuesta*/
+//            new EnviarMensaje().enviarMensajeString(ACLMessage.INFORM, "Ag2", getAgent(), "Hola agente, soy " + getAgent().getName(), "COD001");
+//            
+//            /*Como el agente va a recibir un mensaje del agente 4, tenemos que bloquear el ACL hasta 
+//            que reciba ese mensaje 4*/
+//            ACLMessage acl = blockingReceive();
+//            /*Una vez que recibe, se sigue ejecutando el codigo y mostramos el contenido del ACL*/
+//            System.out.println("Ciclo completado recibi: " + acl.getContent());
+//            
+//            /*Una vez que recibe el mensaje ahora si lo matamos para que no se vaya al infinito
+//            recuerda el flujo de trabajo de los agentes*/
+//            doDelete();
+
+            /*======================Segunda parte=========================================*/
+            /*Ahora vamos a usar la clase persona para manipularla desde el agente*/
+            /*Recuierda que ya esta serializada*/
+            Persona persona = new Persona("Alex", "Erazo", "175555555", "El morlan");
+            new EnviarMensaje().enviarMensajeObject(ACLMessage.INFORM, "Ag2", getAgent(), persona, "CODAg1-Ag2");
             
-            /*Como el agente va a recibir un mensaje del agente 4, tenemos que bloquear el ACL hasta 
-            que reciba ese mensaje 4*/
-            ACLMessage acl = blockingReceive();
-            /*Una vez que recibe, se sigue ejecutando el codigo y mostramos el contenido del ACL*/
-            System.out.println("Ciclo completado recibi: " + acl.getContent());
-            
-            /*Una vez que recibe el mensaje ahora si lo matamos para que no se vaya al infinito
-            recuerda el flujo de trabajo de los agentes*/
-            doDelete();
         }
         
     }
